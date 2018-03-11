@@ -26,7 +26,7 @@ and user mention. A pagination feature is also required, giving the possibility 
 query.
 - Use GitHub to store and version your code
 
-** Request examples: **
+*Request examples:*
 
 | Function  | URL      |
 |------------------------------------------------------------|---------------------------------------------------------------------------------------|
