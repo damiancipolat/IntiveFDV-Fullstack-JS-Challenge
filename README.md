@@ -25,3 +25,10 @@ Build a server with the following features:
 and user mention. A pagination feature is also required, giving the possibility to query 30, 50 and 100 tweets in the same
 query.
 - Use GitHub to store and version your code
+
+** Request examples: **
+
+- Filter by username:  http://127.0.0.1:8000/filter?user=damcipolat
+- Filter by username with pagination: http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat
+- Filter by username and hashtag with pagination: http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css
+- Filter by username and hashtah and mention with pagination:  http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css&mention=peter
