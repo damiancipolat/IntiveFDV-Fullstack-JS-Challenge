@@ -47,3 +47,14 @@ This is the settings file structure:
   }
 }
 ```
+
+##### TO test the Api-Rest:
+Make a GET request at this endpoinst.
+
+
+| Function  | URL      |
+|------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Filter by username                                         | http://127.0.0.1:8000/filter?user=damcipolat                                          |
+| Filter by username with pagination                         | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat                           |
+| Filter by username and hashtag with pagination             | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css               |
+| Filter by username and hashtah and mention with pagination | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css&mention=peter |
