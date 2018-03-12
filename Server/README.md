@@ -33,8 +33,8 @@ This is the settings file structure:
     "access_token_secret" : "..."
   },
   "bd":{
-      "url"  : "..",
-      "name" : ".."
+      "url"  : "...",
+      "name" : "..."
   },
   "server":{
     "ip"   : "127.0.0.1",
