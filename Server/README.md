@@ -48,7 +48,7 @@ This is the settings file structure:
 }
 ```
 
-##### TO test the Api-Rest:
+##### TO test the API-REST:
 Make a GET request at this endpoinst.
 
 
