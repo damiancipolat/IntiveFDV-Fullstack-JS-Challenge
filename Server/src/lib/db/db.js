@@ -30,15 +30,15 @@ const connect = (dbUrl)=>{
 }
 
 //Save a tweet in the bd.
-const saveTweet = (db,tweet)=>{
+const saveTweet = (bdConex,tweet)=>{
 
   return new Promise((resolve,reject)=>{
 
     //Select db.
-    let dbo = db.db(global.settings.db.name);
+    let dbo = bdConex.db(global.settings.bd.name);
 
     //Insert the tweet.
-    dbo.collection("tweets").insertOne(myobj, function(err, res) {
+    dbo.collection("tweets").insertOne(tweet, function(err, res) {
 
       if (err)
         reject(err);
@@ -52,18 +52,17 @@ const saveTweet = (db,tweet)=>{
 }
 
 //Find tweets
-const findTweets = (conex,params)=>{
+const findTweets = (bdConex,params)=>{
 
   //Make the query.
   let query = filter.queryFilter(params);  
 
-  //console.log('>scan',query);
-
   //If a paginated request.
   if ((params.to!=null)||(params.limit!=null))
-    return filter.findPagination(conex,query,parseInt(params.to),parseInt(params.limit));
+    return filter.findPagination(bdConex,query,parseInt(params.to),parseInt(params.limit));
   else
-    return filter.findNormal(conex,query);
+    return filter.findNormal(bdConex,query);
+
 }
 
 module.exports.connect    = connect;

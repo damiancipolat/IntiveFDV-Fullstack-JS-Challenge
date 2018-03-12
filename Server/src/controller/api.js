@@ -29,9 +29,10 @@ const onListen = ()=>{
 
   //Logeo arranque del server.
   console.log('Tweet JS - ApiRest');
-  console.log('');  
+  console.log('');
   console.log(`* Server is running on http://${global.settings.server.ip}:${global.settings.server.port}`);
-
+  console.log('');
+  
 }
 
 //On Api find routes.
@@ -46,10 +47,7 @@ const filterRoute = (req,res)=>{
     //Find tweets in the db.
     db.findTweets(bdConex,queryParams)
       .then((result) => res.status(200).json(result))
-      .catch((err)   =>{
-        console.log(err);
-       res.status(500).json({"error":"Query error"});
-    });
+      .catch((err)   => res.status(500).json({"error":"Query error"}));
 
   }).catch((err) => res.status(500).json({"error":"Query error"}));
 
@@ -64,7 +62,7 @@ const startServer = ()=>{
   app.use(allowCrossDomain);
 
   //Inicio el server.
-  app.listen(settings.server.port, onListen);
+  app.listen(global.settings.server.port, onListen);
 
   //Filter route request.
   app.get('/filter/',filterRoute);

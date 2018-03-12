@@ -16,26 +16,37 @@ const tweetObj   = (tweet)=>{
 const scannTweets = (tweetWord)=>{
 
   //Create twitter streaming object.
-  const tweetEvents = new TwitterEvents(global.settings.twitter);
+  const tweetEvents = new TwitterEvents();
 
   //Enable connection.
   db.connect(global.settings.bd.url).then((bdConex)=>{
 
-    console.log('Mongodb connection ok!');
-    console.log('Waiting for new tweets:',tweetWord);
+    console.log('> Mongodb connection ok!');
+    console.log('> Waiting for new tweets:',tweetWord,'\n');    
 
     //Inicio revision de tweets.
     tweetEvents.trackWord(tweetWord,()=>{
-      console.log('Tracking Twitter word...');
+
+      console.log('> Tracking Twitter word...\n');
+
     });
 
     //Cuando recibo un tweet de JS.
     tweetEvents.on('onTweet',(tweet)=>{
 
+      console.log('OK> Received tweet from:',tweet.user.name,'\nOK> Text:',tweet.text);
+
       //Store a tweet in bd.
-      bd.saveTweet(bdConex,tweetObj(tweet))
-        .then((ok)   => console.log('OK> New tweet saved.'))
-        .catch((err) => console.log("ERROR> could'nt save a tweet"));
+      db.saveTweet(bdConex,tweetObj(tweet))
+        .then((ok)   => console.log('OK> New tweet saved.\n'))
+        .catch((err) => console.log("ERROR> could'nt save a tweet",err));
+
+    });
+
+    //Cuando el tracker recibe un error.
+    tweetEvents.on('onError',(error)=>{
+      
+      console.log('ERROR> Received error in twitter tracker',error);
 
     });
 

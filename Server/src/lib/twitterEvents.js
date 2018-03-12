@@ -11,7 +11,7 @@ class TwitterEvents extends EventEmitter {
     super();
 
     //Store configurations.
-    this.configApi = global.settings;
+    this.configApi = global.settings.twitter;
 
     //Create twitter instance.
     this.client    =  new Twitter({
