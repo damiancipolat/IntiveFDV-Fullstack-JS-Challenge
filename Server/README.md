@@ -50,7 +50,7 @@ This is the settings file structure:
 }
 ```
 
-##### TO test the API-REST:
+##### To test the API-REST:
 Make a GET request at this endpoinst.
 
 
