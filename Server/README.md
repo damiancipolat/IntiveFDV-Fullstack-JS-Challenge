@@ -24,6 +24,7 @@ $ nano settings.json
 ```
 
 This is the settings file structure:
+```json
 {
   "twitter":{
     "consumer_key"        : "...",
