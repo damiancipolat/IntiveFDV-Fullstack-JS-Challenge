@@ -29,8 +29,8 @@ This is the settings file structure:
   "twitter":{
     "consumer_key"        : "...",
     "consumer_secret"     : "...",
-    "access_token_key"    : "....",
-    "access_token_secret" : ...u"
+    "access_token_key"    : "...",
+    "access_token_secret" : "..."
   },
   "bd":{
       "url"  : "..",
