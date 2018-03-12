@@ -11,5 +11,5 @@ $ npm run build
 
 Run the webserver to publish the static files.
 ```sh
-$ npm run start
+$ npm start
 ```
