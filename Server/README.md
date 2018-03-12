@@ -6,8 +6,13 @@ and user mention. A pagination feature is also required, giving the possibility 
 query.
 - Use GitHub to store and version your code
 
+#### Development details:
+To create this project use the "tweet" module of npm to consume the Twitter streaming API, also use the ExpressJS framework to create the api rest. As a database I use MongoDB.
+
+The MongoDB server that I use whas MongoLab.
+
 #### To install and run:
-Follow this instruction to instal proyect dependencies and run the server.
+Follow this instruction to instal the proyect dependencies and run the server.
 
 ```sh
 $ cd Server
