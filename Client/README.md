@@ -1,13 +1,15 @@
-Para Webpack 2
+# CLIENT
 
-### Instalación:
+### Configuration and Run:
 
-Para descargar todos los modulos adicionales:
+Run the following commands to install the UI project:
 ```sh
+$ cd Client
 $ npm install
+$ npm run build
 ```
 
-Para transpilar toda la aplicación:
+Run the webserver to publish the static files.
 ```sh
-$ npm run bundle
+$ npm run start
 ```
