@@ -9,7 +9,7 @@ query.
 #### Development details:
 To create this project use the "tweet" module of npm to consume the Twitter streaming API, also use the ExpressJS framework to create the api rest. As a database I use MongoDB.
 
-The MongoDB server that I use whas MongoLab.
+The MongoDB server that I use was MongoLab.
 
 #### To install and run:
 Follow this instruction to instal the proyect dependencies and run the server.
