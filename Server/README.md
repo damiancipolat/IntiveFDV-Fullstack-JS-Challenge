@@ -23,17 +23,21 @@ $ cd Server
 $ nano settings.json
 ```
 
-This is the settings structure:
-```json
+This is the settings file structure:
 {
   "twitter":{
-    "consumer_key"        : "kNdnOZHq0dUiljNaWX5OrRnND",
-    "consumer_secret"     : "zHSPRyMREdrPXOgF5yicLhVxKgKmaIMEYgoXvIH913TDsR4r9Q",
-    "access_token_key"    : "515917811-xSTrCyPStmrouTkh8VjjbXQQO5sU54cc2BZuRghs",
-    "access_token_secret" : "wSw9gLpQoSj9cYsXChJQOUvcGSJ4hKOgxBRVWNovtYKfu"
+    "consumer_key"        : "...",
+    "consumer_secret"     : "...",
+    "access_token_key"    : "....",
+    "access_token_secret" : ...u"
   },
   "bd":{
-        "mongo" : "mongodb://dcipolat:26dd031b@ds263408.mlab.com:63408/jstweets"
+      "url"  : "..",
+      "name" : ".."
+  },
+  "server":{
+    "ip"   : "127.0.0.1",
+    "port" : 8000
   }
 }
 ```
