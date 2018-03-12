@@ -1,6 +1,6 @@
 # JsTweetsApi
 
-### Client React/Redux/Webpack:
+### - Client React/Redux/Webpack:
 EJERCICIO TÉCNICO:
 Crear un componente o un grupo de componentes que traigan un formulario con:
 - Nombre
@@ -18,10 +18,19 @@ Puntos extra si:
 - Si se Sass / less
 
 
-### Server Node.js:
+### - Server Node.js:
 Build a server with the following features:
 - Connect to the Twitter API and save in a DB every time a new tweet with the word "javascript" in the body is generated.
 - Expose an API so a client can get all the stored tweets. It must be possible to filter the tweets by username, hashtag
 and user mention. A pagination feature is also required, giving the possibility to query 30, 50 and 100 tweets in the same
 query.
 - Use GitHub to store and version your code
+
+*Request examples:*
+
+| Function  | URL      |
+|------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Filter by username                                         | http://127.0.0.1:8000/filter?user=damcipolat                                          |
+| Filter by username with pagination                         | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat                           |
+| Filter by username and hashtag with pagination             | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css               |
+| Filter by username and hashtah and mention with pagination | http://127.0.0.1:8000/filter?to=10&limit=40&user=damcipolat&hashtag=css&mention=peter |
