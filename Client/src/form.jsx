@@ -74,6 +74,14 @@ class Form extends React.Component{
     return ((this.props.state.visitor.name!='')&&(this.props.state.visitor.country!='')&&(this.props.state.visitor.birthday!=''));
   }
 
+  getLabel(){
+    return (this.props.state.label.show?'Hola '+this.props.state.label.name+
+                                        ' de '+this.props.state.label.country+
+                                        ' el día '+this.props.state.label.day+
+                                        ' del '+this.props.state.label.month+
+                                        ' tendras '+this.props.state.label.years:'');
+  }
+
   render(){    
 
     return (<div className="container">
@@ -103,7 +111,7 @@ class Form extends React.Component{
                     <button type="button" className={this.saveOk()?'btn btn-primary':'btn btn-primary disabled'} onClick={this.handleSave}>Saludar</button>
                   </div>
                   <div className="label-date">
-                    <h3>Hola nombre de pais. el dia del mes tendras años</h3>
+                    <h3>{this.getLabel()}</h3>
                   </div>
                 </div>
                 <div className="col-md-6">

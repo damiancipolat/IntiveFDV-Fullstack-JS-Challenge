@@ -1,4 +1,5 @@
 import estado  from './store.js';
+import moment  from 'moment';
 
 // Preparamos nuestra funcion reducer
 const reducer = (state = estado, action) => {
@@ -7,9 +8,10 @@ const reducer = (state = estado, action) => {
     case 'get-countries':{
 
       return {
-          visitor      : state.visitor,
-          lastVisitors : state.lastVisitors,
-          countries    : action.countries
+          visitor: state.visitor,
+          lastVisitors: state.lastVisitors,
+          countries: action.countries,
+          label: state.label
       };
 
     }
@@ -18,14 +20,22 @@ const reducer = (state = estado, action) => {
 
       let newVisitor = {
         visitor : action.visitor,
-        txt     : action.visitor.name+" - "+action.visitor.country.obj.txt+" - "+action.visitor.birthday
+        txt : action.visitor.name+" - "+action.visitor.country.obj.txt+" - "+moment(action.visitor.birthday, 'YYYY-MM-DD').format('DD/MM/YYYY')
       };
 
       //Agrego un visitante al registro.
       return {
-                visitor      : state.visitor,
-                lastVisitors : [...state.lastVisitors,newVisitor],
-                countries    : state.countries
+                visitor: state.visitor,
+                lastVisitors: [...state.lastVisitors,newVisitor],
+                countries : state.countries,
+                label: {
+                  name: state.visitor.name,
+                  country : action.visitor.country.obj.txt,
+                  day:moment(action.visitor.birthday, 'YYYY-MM-DD').day(),
+                  month:moment(action.visitor.birthday, 'YYYY-MM-DD').year(),
+                  years:moment().diff(moment(action.visitor.birthday, 'YYYY-MM-DD'),'years'),
+                  show:true
+                }
             };
 
     }
@@ -35,12 +45,13 @@ const reducer = (state = estado, action) => {
       //Actualizo el pais.
       let obj = {
                   visitor:{
-                    name     : state.visitor.name,
-                    country  : action.country,
-                    birthday : state.visitor.birthday
+                    name : state.visitor.name,
+                    country: action.country,
+                    birthday: state.visitor.birthday
                   },
                   lastVisitors:state.lastVisitors,
-                  countries   : state.countries
+                  countries: state.countries,
+                  label: state.label                  
                 };
 
       return obj;
@@ -52,12 +63,13 @@ const reducer = (state = estado, action) => {
       //Actualizo el nombre.
       let obj = {
                   visitor:{
-                    name     : action.name,
-                    country  : state.visitor.country,
-                    birthday : state.visitor.birthday
+                    name: action.name,
+                    country: state.visitor.country,
+                    birthday: state.visitor.birthday
                   },
                   lastVisitors: state.lastVisitors,
-                  countries   : state.countries
+                  countries: state.countries,
+                  label: state.label
                 };
 
       return obj;
@@ -69,12 +81,13 @@ const reducer = (state = estado, action) => {
       //Actualizo el cumpleaños.
       let obj = {
                   visitor:{
-                    name     : state.visitor.name,
-                    country  : state.visitor.country,
-                    birthday : action.date
+                    name : state.visitor.name,
+                    country: state.visitor.country,
+                    birthday: action.date
                   },
                   lastVisitors: state.lastVisitors,
-                  countries   : state.countries
+                  countries: state.countries,
+                  label: state.label
                 };
 
       return obj;

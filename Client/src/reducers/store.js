@@ -6,7 +6,15 @@ const estado ={
       birthday : ''
    },
    lastVisitors:[],
-   countries : []
+   countries : [],
+   label : {
+   	name: '',
+   	country : '',
+   	day:'',
+   	month:'',
+   	years:'',
+   	show:false
+   }
 };
 
 export default estado;
