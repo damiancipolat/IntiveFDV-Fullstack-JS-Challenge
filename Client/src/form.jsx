@@ -25,6 +25,7 @@ class Form extends React.Component{
     this.handleChangeBirthday = this.handleChangeBirthday.bind(this);
     this.handleChangeCountry  = this.handleChangeCountry.bind(this);    
     this.handleSave           = this.handleSave.bind(this);
+    this.handleSelectVisitor  = this.handleSelectVisitor.bind(this);
 
   }
 
@@ -71,18 +72,32 @@ class Form extends React.Component{
   }
 
   saveOk(){
+
     return ((this.props.state.visitor.name!='')&&(this.props.state.visitor.country!='')&&(this.props.state.visitor.birthday!=''));
+    
   }
 
   getLabel(){
+
     return (this.props.state.label.show?'Hola '+this.props.state.label.name+
                                         ' de '+this.props.state.label.country+
                                         ' el día '+this.props.state.label.day+
                                         ' del '+this.props.state.label.month+
                                         ' tendras '+this.props.state.label.years:'');
+
   }
 
-  render(){    
+  handleSelectVisitor(visitor){
+
+    //Recupero la info del visitante.
+    let visitorTmp = this.props.state.lastVisitors[visitor.ix];
+
+    if (visitorTmp!=null)
+      this.props.dispatch({type:'change-label',visitor:visitorTmp.visitor});
+    
+  }
+
+  render(){
 
     return (<div className="container">
               <div className="row">
@@ -115,7 +130,7 @@ class Form extends React.Component{
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <ListBox height={"555px"} items={this.props.state.lastVisitors} title="Visitantes Anteriores" onChange={(e)=>{}}/>
+                  <ListBox height={"555px"} items={this.props.state.lastVisitors} title="Visitantes Anteriores" onChange={this.handleSelectVisitor}/>
                 </div>
               </div>
             </div>);

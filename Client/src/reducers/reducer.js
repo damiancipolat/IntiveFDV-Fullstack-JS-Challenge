@@ -5,6 +5,24 @@ import moment  from 'moment';
 const reducer = (state = estado, action) => {
   
   switch(action.type) {
+    case 'change-label':{
+
+      return {
+                visitor: state.visitor,
+                lastVisitors: state.lastVisitors,
+                countries : state.countries,
+                label: {
+                  name: action.visitor.name,
+                  country : action.visitor.country.obj.name,
+                  day:moment(action.visitor.birthday, 'YYYY-MM-DD').day(),
+                  month:moment(action.visitor.birthday, 'YYYY-MM-DD').year(),
+                  years:moment().diff(moment(action.visitor.birthday, 'YYYY-MM-DD'),'years'),
+                  show:true
+                }
+            };
+
+    }
+    break;    
     case 'get-countries':{
 
       return {
@@ -30,7 +48,7 @@ const reducer = (state = estado, action) => {
                 countries : state.countries,
                 label: {
                   name: state.visitor.name,
-                  country : action.visitor.country.obj.txt,
+                  country : action.visitor.country.obj.name,
                   day:moment(action.visitor.birthday, 'YYYY-MM-DD').day(),
                   month:moment(action.visitor.birthday, 'YYYY-MM-DD').year(),
                   years:moment().diff(moment(action.visitor.birthday, 'YYYY-MM-DD'),'years'),
