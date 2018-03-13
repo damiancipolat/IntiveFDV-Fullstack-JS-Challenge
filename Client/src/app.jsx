@@ -1,22 +1,22 @@
 import React           from 'react';
 import ReactDOM        from 'react-dom';
+import { Provider }    from 'react-redux';
 import { createStore } from 'redux';
 
-import Form           from './form.jsx';
-import processReducer from './reducer.js';
+import App     from './form.jsx';
+import reducer from './reducers/reducer.js';
 
 // Inicializamos el store pasándole el reducer
-const store = createStore(processReducer);
+const store = createStore(reducer);
 
 //Renderizo
 const render = () => {
 
-  /*ReactDOM.render(<Form value      = {store.getState()}
-                        onProcess  = {(val)=> store.dispatch(val)}/>,
-                  document.getElementById('app'));*/
-  ReactDOM.render(<div>HOLAAAA</div>,document.getElementById('app'));                  
+  ReactDOM.render( <Provider store={store}>
+                      <App/>
+                    </Provider>,
+                    document.getElementById('app'));                  
 
 };
 
-store.subscribe(render);
 render();

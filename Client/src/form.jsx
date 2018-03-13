@@ -1,108 +1,92 @@
-import React     from 'react';
-import ReactDOM  from 'react-dom';
-
-//Incluyo componentes.
-import Textbox from './textbox.jsx';
-import Tokens  from './tokens.jsx';
+import React       from 'react';
+import ReactDOM    from 'react-dom';
+import { connect } from 'react-redux';
 
 //Styles
 import './form.less';
 
-//Servicios.
-import Api from './api.js';
+import ListBox from './components/list-box.jsx';
 
-//Form
+const mapStateToProps = (state) => {
+  return { state };
+}
+
 class Form extends React.Component{
 
   constructor(props){
 
     super(props);
-    this.state      = {text:''};
-    this.updateText = this.updateText.bind(this);
-    this.procSpeech = this.procSpeech.bind(this);
+
+    this.handleChangeName     = this.handleChangeName.bind(this);
+    this.handleChangeBirthday = this.handleChangeBirthday.bind(this);
+    this.handleChangeCountry  = this.handleChangeCountry.bind(this);    
+    this.handleSave           = this.handleSave.bind(this);
 
   }
 
-  updateText(val){
-
-    this.setState({text:val});
-    
+  handleChangeName(e){    
+    this.props.dispatch({type:'update-name',name:e.target.value});
   }
 
-  procSpeech(){
+  handleChangeBirthday(e){    
+    this.props.dispatch({type:'update-birthday',date:e.target.value});
+  }
 
-    if (this.state.text!=''){
+  handleChangeCountry(countryObj){
+    this.props.dispatch({type:'update-country',country:countryObj});
+  }
 
-      //Modo de carga.
-      this.props.onProcess({type: 'loading'});
+  //Guardo en el store la nueva visita.
+  handleSave(){
+     this.props.dispatch({type:'save-visitor',visitor:this.state.visitor});
+  }
 
-      //Hago el request, envo al reducer los datos.
-      Api.findTextRequest(this.state.text)
-        .then((result) => this.props.onProcess({type: 'process',payload:result}))
-        .catch((err)   => this.props.onProcess({type: 'proc-error'}));
-
-    }
-
+  saveOk(){
+    return ((this.props.state.visitor.name!='')&&(this.props.state.visitor.country!='')&&(this.props.state.visitor.birthday!=''));
   }
 
   render(){
     
-    return (<div>
-              {/* Banner */}
-              <div className="banner">
-                <div className="title">Real English</div>
-              </div>                            
-              {/* Formulario */}
-              <div className="form">
-                <div className="title">
-                  <img src="./img/british.png" className="voz-icon"/>
-                  English Speech
-                </div>
-                <div className="detail">
-                  Escribe el texto en ingles, para poder obtener la pronuciación de cada palabra, luego haz click en <b>procesar</b>.
-                </div>
-                <div className="text-panel">
-                    <Textbox onChange={this.updateText}/>
-                    {/* Boton de procesar */}
-                    <input type="button" value="Procesar" className="proc-btn" onClick={this.procSpeech}/>
-                </div>
-              </div>              
-              {/* Resultados */} 
-              {this.props.value.status!=null?
-              <div className="form">
-                {/* Muestro cuando hubo un error */}
-                {this.props.value.status=='error'?
-                <div className="title-error">
-                  Se produjo un error.
-                  <div className="detail-error">
-                    Hubo un problema al hacer la busqueda intenta nuevamente.
+    let tmp = ['Argentina','Uruguay','Colombia','Argentina','Uruguay','Colombia','Argentina','Uruguay','Colombia','Argentina','Uruguay','Colombia','Argentina','Uruguay','Colombia'];
+
+    return (<div className="container">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="banner">
+                    <h4>Ejercicio Intive</h4>
+                    <span>{(this.props.state.visitor.name!='')?"Nombre: "+this.props.state.visitor.name:<br/>}</span>
                   </div>
-                </div>:''}
-                {/* Muestro msj de cargando */}
-                {this.props.value.status=='loading'?
-                <div className="title-single">
-                  <img src="./img/spinner.gif" className="voz-icon"/>
-                  Procesando texto...
-                </div>:''}
-                {/* Resultados */}
-                {this.props.value.status=='success'?
-                <div>
-                  <div className="title">
-                    <img src="./img/voz.png" className="voz-icon"/>
-                    Audio tokens
+                </div>
+              </div>
+              <div className="row form-div">
+                <div className="col-md-6">
+                  <div className="form-bloq">
+                    <label>Nombre:</label>
+                    <input type="text" value={this.props.state.visitor.name} onChange={this.handleChangeName}/>
                   </div>
-                  <div className="detail">
-                    Haz click sobre cada palabra para escuchar su pronuciación.
+                  <div className="form-bloq paises">
+                    <label>Pais:</label>
+                    <ListBox items={tmp} title="Paises" onChange={this.handleChangeCountry}/>
                   </div>
-                  <div className="tokens-div">
-                    <Tokens data={this.props.value}/>
-                  </div>                  
-                </div>:''}
-              </div>:''}
+                  <div className="form-bloq">
+                    <label>Cumpleaños:<br/>(dd/mm/yyyy)</label>
+                    <input type="date" onChange={this.handleChangeBirthday}/>
+                  </div>
+                  <div className="form-bloq">
+                    <button type="button" className={this.saveOk()?'btn btn-primary':'btn btn-primary disabled'} onClick={this.handleSave}>Saludar</button>
+                  </div>
+                  <div className="label-date">
+                    <h3>Hola nombre de pais. el dia del mes tendras años</h3>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <ListBox items={tmp} title="Visitantes Anteriores" onChange={(e)=>{}}/>
+                </div>
+              </div>
             </div>);
 
   }
 
 }
 
-export default Form;
+export default connect(mapStateToProps)(Form);
